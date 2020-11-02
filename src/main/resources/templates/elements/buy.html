@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
+<link rel="icon" href="../../favicon.ico"></link>
+
+<title>Student Advertisement</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+<!-- Custom styles for this template -->
+<link href="css/main.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div class="content" th:fragment="buy">
+		<div class="col-md-4 col-md-offset-4">
+			<form method="post" th:action="@{/buy}" th:object="${buy}">
+
+				<div class="form-group">
+					<label for="exampleInputEmail1">Title</label>
+					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name
+						Error</div>
+					<input type="text" class="form-control" id="title"
+						placeholder="Advertisment title" th:field="*{title}"></input>
+				</div>
+
+				<div class="form-group">
+					<label for="exampleTextarea">Description</label>
+					<div th:if="${#fields.hasErrors('adBody')}" th:errors="*{adBody}">Name
+						Error</div>
+					<textarea class="form-control" id="adBody" rows="3"
+						th:field="*{adBody}"></textarea>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon">RON</span> <input type="number"
+						class="form-control" placeholder="Price" th:field="*{price}"></input>
+
+				</div>
+				<p></p>
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

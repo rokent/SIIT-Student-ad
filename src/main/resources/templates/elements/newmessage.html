@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
+<link rel="icon" href="../../favicon.ico"></link>
+
+<title>Student Advertisement</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+<!-- Custom styles for this template -->
+<link href="css/main.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div class="content" th:fragment="newmessage">
+		<form method="post" th:action="@{/newmessage}" th:object="${message}">
+			<input type="hidden" th:field="*{sender}"></input> <input
+				type="hidden" th:field="*{reciver}"></input> <input type="hidden"
+				th:field="*{messageDate}"></input>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="well text-center">
+							<p>
+								<small>New Message</small>
+							</p>
+
+							<div th:if="${#fields.hasErrors('messageTitle')}"
+								th:errors="*{messageTitle}">Name Error</div>
+
+							<div class="form-group">
+								<input class="form-control" id="title" maxlength="100"
+									th:field="*{messageTitle}" placeholder="Message title"
+									type="text"></input>
+							</div>
+
+							<div th:if="${#fields.hasErrors('messageBody')}"
+								th:errors="*{messageBody}">Name Error</div>
+
+							<div class="form-group">
+								<textarea class="form-control" cols="40" id="id_mensagem"
+									th:field="*{messageBody}" placeholder="Message" rows="10"></textarea>
+							</div>
+							<button type="submit" class="btn btn-default">Send</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

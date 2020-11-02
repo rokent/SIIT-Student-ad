@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
+<link rel="icon" href="../../favicon.ico"></link>
+
+<title>Student Advertisement</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+<!-- Custom styles for this template -->
+<link href="css/main.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div class="content" th:fragment="messagebox">
+		<div class="container">
+			<div class="row">
+				<div class="box-body no-padding">
+					<div class="mailbox-controls">
+
+						<nav>
+							<ul class="pagination" sd:pagination="aligned-links">
+								<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							</ul>
+						</nav>
+					</div>
+					<hr>
+					<div class="table-responsive mailbox-messages">
+						<table class="table table-hover table-striped">
+							<tbody>
+								<td><b>Subject</b></td>
+								<td>Sender</td>
+								<td>Date</td>
+								<td>Delete</td>
+								<span th:each="message : ${page}">
+									<tr>
+
+										<td class="mailbox-subject"><b
+											th:text="${message.messageTitle}"></b></td>
+										<td class="mailbox-name"><a th:href="@{'/read-mail?id=' + ${message.id}}"
+											th:text="'From :' +${message.sender.email}"></a></td>
+										<td class="mailbox-date"
+											th:text="${#dates.format(message.messageDate, 'HH:mm dd-MMM-yyyy')}">5
+											mins ago</td>
+										<td class="btn btn-default btn-sm"><a
+											onclick="return confirm('Really delete this status update?');"
+											th:href="@{'/deletemessage?id=' + ${message.id}}"> <i
+												class="glyphicon glyphicon-trash"></i></a></td>
+									</tr>
+								</span>
+							</tbody>
+						</table>
+						<!-- /.table -->
+					</div>
+					<!-- /.mail-box-messages -->
+					</hr>
+				</div>
+				<!-- /.box-body -->
+				<hr>
+				<nav>
+					<ul class="pagination" sd:pagination="aligned-links">
+						<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+						<li class="disabled"><a href="#" aria-label="Previous"><span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					</ul>
+				</nav>
+				</hr>
+			</div>
+			<!-- /. box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+
+
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
+
+

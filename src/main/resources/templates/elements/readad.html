@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
+<link rel="icon" href="../../favicon.ico"></link>
+
+<title>Student Advertisement</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+<!-- Custom styles for this template -->
+<link href="css/main.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+	<div class="content" th:fragment="readad">
+		
+		<section class="col-xs-12 col-sm-6 col-md-12">
+			
+				<article class="search-result row">
+					<div class="col-xs-12 col-sm-12 col-md-3">
+						<a href="#" title="Lorem ipsum" class="thumbnail"><img
+							src="/img/no-thumb.jpg" alt="Lorem ipsum" /></a>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-2">
+						<ul class="meta-search">
+							<li><i class="glyphicon glyphicon-calendar"></i> <span
+								th:text="${#dates.format(ad.addDate, 'dd-MMM-yyyy')}"></span></li>
+							<li><i class="glyphicon glyphicon-time"></i> <span
+								th:text="${#dates.format(ad.addDate, 'HH:mm')}"></span></li>
+							<li><i class="glyphicon glyphicon-tags"></i> <span
+								th:text="${ad.adType}"></span></li>
+							<th:block th:switch="${ad.adType}">
+								<div th:case="'Sell'">
+									<li><i class="glyphicon glyphicon-euro"></i> <span
+										th:text="${ad.price}+' RON'"></span></li>
+								</div>
+								<div th:case="'Buy'">
+									<li><i class="glyphicon glyphicon-euro"></i> <span
+										th:text="${ad.price}+' RON'"></span></li>
+								</div>
+								<div th:case="'Event'">
+									<li><i class="glyphicon glyphicon-glass"></i> <span
+										th:text="${'Event Date : ' + #dates.format(ad.eventDate, 'dd-MMM-yyyy')}"></span></li>
+								</div>
+							</th:block>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+						<h3>
+							<a href="#" title="" th:text="${ad.title}"></a>
+						</h3>
+						<p th:text="${ad.adBody}"></p>
+					</div>
+
+					<th:block th:switch="${ad.owner.email}">
+						<div class="edit-links pull-right">
+							<a th:case="${loggedUser}"> <a
+								th:href="@{'/editad?id=' + ${ad.id}}">edit</a> | <a
+								onclick="return confirm('Really delete this status update?');"
+								th:href="@{'/deletead?id=' + ${ad.id}}">delete</a></a> <a
+								th:case="*"
+								onclick="return confirm('Do you wish to send a message to ad owner?');"
+								th:href="@{'/newmessage?id=' + ${ad.id}}">Send Message</a>
+						</div>
+					</th:block>
+
+
+					<span class="clearfix borda"></span>
+				</article>
+			
+		</section>
+	</div>
+
+</body>
+</html>
